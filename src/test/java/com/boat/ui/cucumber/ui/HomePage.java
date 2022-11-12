@@ -56,6 +56,10 @@ public class HomePage {
         Reporter.log("place order",true);
     }
 
+    public void cancelOrder(String order){
+        Reporter.log("Cancelling order : "+order,true);
+    }
+
     public void placeOrder(DataTable dataTable){
         Reporter.log("place order",true);
 
