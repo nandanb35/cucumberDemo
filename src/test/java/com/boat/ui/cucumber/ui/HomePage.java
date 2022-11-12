@@ -66,4 +66,13 @@ public class HomePage {
         });
 
     }
+
+    public void returnOrder(String orderID){
+        Reporter.log("Returning order " + orderID, true);
+    }
+
+    public void replaceOrder(int orderID){
+        Reporter.log("Replacing order " + orderID, true);
+    }
+
 }

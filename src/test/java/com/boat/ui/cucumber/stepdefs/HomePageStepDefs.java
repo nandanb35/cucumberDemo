@@ -72,7 +72,14 @@ public class HomePageStepDefs extends BaseClass {
 
     @Then("I return order with order id {string}")
     public void returnOrder(String orderId) {
-        Reporter.log("Returning order " + orderId, true);
+        HomePage homepage = PageFactory.initElements(driver, HomePage.class);
+        homepage.returnOrder(orderId);
+    }
+
+    @Then("I replace order with order id {int}")
+    public void replaceOrder(Integer orderId) {
+        HomePage homepage = PageFactory.initElements(driver, HomePage.class);
+        homepage.replaceOrder(orderId);
     }
 
     @Given("This is background step")
