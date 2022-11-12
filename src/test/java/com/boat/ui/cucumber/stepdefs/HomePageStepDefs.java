@@ -82,6 +82,13 @@ public class HomePageStepDefs extends BaseClass {
         homepage.replaceOrder(orderId);
     }
 
+    @Given("I cancel order {string}")
+    public void placeOrder(String orderId) {
+        HomePage homepage = PageFactory.initElements(driver, HomePage.class);
+        homepage.cancelOrder(orderId);
+    }
+
+
     @Given("This is background step")
     public void backgroundStep() {
         Reporter.log("background step", true);

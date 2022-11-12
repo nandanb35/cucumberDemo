@@ -44,3 +44,20 @@ Feature: UI Feature
       | lastName  | isRequired | true  |
       | email     | isRequired | true  |
     And I replace order with order id '7654490'
+
+  @Regression @Sanity
+  Scenario: Test case number four
+    Given I login as user with below details
+      | name | Felix |
+      | age  | 35    |
+    When I navigate to homepage
+    And I add below products to cart
+      | iphone |
+      | watch  |
+      | ipad   |
+    Then I place an order with below details
+      | FIELDNAME | KEY        | VALUE |
+      | firstName | isRequired | true  |
+      | lastName  | isRequired | true  |
+      | email     | isRequired | true  |
+    And I cancel order '523489'
