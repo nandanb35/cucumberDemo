@@ -1,6 +1,0 @@
-com\boat\ui\cucumber\runner\TestRunner.class
-com\boat\ui\cucumber\stepdefs\HomePageStepDefs.class
-com\boat\ui\cucumber\stepdefs\CartPageStepDefs.class
-com\boat\ui\cucumber\ui\HomePage.class
-com\boat\ui\cucumber\ui\BaseClass.class
-com\boat\ui\cucumber\ui\CartPage.class
