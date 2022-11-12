@@ -43,7 +43,7 @@ Feature: UI Feature
       | firstName | isRequired | true  |
       | lastName  | isRequired | true  |
       | email     | isRequired | true  |
-    And I replace order with order id '7654490'
+    And I replace order with order id 7654490
 
   @Regression @Sanity
   Scenario: Test case number four

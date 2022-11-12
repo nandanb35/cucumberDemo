@@ -87,8 +87,6 @@
         </dependency>
 
 
-
-
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
         <dependency>
             <groupId>io.cucumber</groupId>
@@ -108,16 +106,25 @@
                     <properties>
                         <property>
                             <name>dataproviderthreadcount</name>
-                            <value>1</value>
+                            <value>2</value>
                         </property>
                     </properties>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
 
         </plugins>
 
     </build>
-
 
 
     <properties>
