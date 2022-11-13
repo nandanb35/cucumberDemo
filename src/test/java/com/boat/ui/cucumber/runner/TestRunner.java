@@ -10,7 +10,10 @@ import org.testng.annotations.DataProvider;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources/features",
-        glue = {"com.boat.ui.cucumber.stepdefs"}
+        glue = {"com.boat.ui.cucumber.stepdefs"},
+        plugin = {
+                "pretty",
+                "json:target/cucumber-report/cucumber.json"}
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
 

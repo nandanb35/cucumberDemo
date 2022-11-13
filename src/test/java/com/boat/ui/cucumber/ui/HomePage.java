@@ -3,6 +3,7 @@ package com.boat.ui.cucumber.ui;
 import io.cucumber.datatable.DataTable;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 import org.testng.Reporter;
 
 import javax.xml.crypto.Data;
@@ -81,6 +82,7 @@ public class HomePage {
 
     public void replaceOrder(int orderID){
         Reporter.log("Replacing order " + orderID, true);
+        Assert.fail("Unable to Replace order");
     }
 
 }
