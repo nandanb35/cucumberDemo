@@ -61,3 +61,21 @@ Feature: UI Feature
       | lastName  | isRequired | true  |
       | email     | isRequired | true  |
     And I cancel order '523489'
+
+  @Prod
+  Scenario: Test case number five
+    Given I login as user with below details
+      | name | John |
+      | age  | 40    |
+    When I navigate to homepage
+    And I add below products to cart
+      | iphone |
+      | watch  |
+      | ipad   |
+    Then I place an order with below details
+      | FIELDNAME | KEY        | VALUE |
+      | firstName | isRequired | true  |
+      | lastName  | isRequired | true  |
+      | email     | isRequired | true  |
+    And I return order with order id '123556'
+    And I cancel order '523489'

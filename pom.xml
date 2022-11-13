@@ -108,6 +108,9 @@
                             <name>dataproviderthreadcount</name>
                             <value>2</value>
                         </property>
+                        <systemPropertyVariables>
+                            <testenv>${testenv}</testenv>
+                        </systemPropertyVariables>
                     </properties>
                 </configuration>
             </plugin>
