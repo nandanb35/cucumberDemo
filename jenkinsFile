@@ -26,7 +26,7 @@ stages{
 
     stage('Build') {
      steps{
-            bat 'mvn clean install -Dcucumber.filter.tags="params.tags" -Dtestenv="${params.env}"'
+            bat 'mvn clean install -Dcucumber.filter.tags=${params.tags} -Dtestenv=${params.env}'
         }
     }
 
