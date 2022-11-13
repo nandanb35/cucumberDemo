@@ -20,13 +20,14 @@ stages{
                     echo "MAVEN_HOME = ${MAVEN_HOME}"
                     echo "${params}"
                     echo "${params.env}"
-                    echo "${env}"
             }
         }
 
     stage('Build') {
      steps{
-            bat 'mvn clean install -Dcucumber.filter.tags=${params.tags} -Dtestenv=${params.env}'
+            def env = ${params.env};
+            def tags = ${params.tags};
+            bat 'mvn clean install -Dcucumber.filter.tags='+tags+' -Dtestenv='+env
         }
     }
 
