@@ -4,17 +4,17 @@ agent any
 
 stages{
 
-    stage('Compile Stage'){
+    stage('Build'){
         steps{
-            withMaven(maven : 'maven_3_8_6'){
-                sh 'mvn test'
+            stage('build') {
+                sh 'mvn clean install -Dcucumber.filter.tags="${tags}" -Dtestenv="${env}"'
             }
         }
     }
 
     stage('Cucumber Reports'){
         steps{
-            cucumber buildStatus: "UNSTABLE",
+            cucumber buildStatus: "SUCCESS",
             fileIncludePattern: "**/cucumber.json",
             jsonReportDirectory: 'target'
         }
