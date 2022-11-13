@@ -4,13 +4,13 @@ agent any
 
 stages{
 
-    stage('Build'){
-        steps{
-            stage('build') {
-                sh 'mvn clean install -Dcucumber.filter.tags="${tags}" -Dtestenv="${env}"'
-            }
+
+    stage('Build') {
+     steps{
+          sh 'mvn clean install -Dcucumber.filter.tags="${tags}" -Dtestenv="${env}"'
         }
     }
+
 
     stage('Cucumber Reports'){
         steps{
