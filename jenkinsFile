@@ -3,8 +3,9 @@ pipeline{
 agent any
 
  parameters {
-        string(name: 'tags', description: 'tags')
-        string(name: 'env', description: 'env')
+        string(name: 'tags', description: '')
+        string(name: 'env', description: '')
+        string(name: 'branch', description: '')
     }
 
 tools {
@@ -21,6 +22,7 @@ stages{
                     echo "${params.env}"
             }
         }
+
 
     stage('Build') {
      steps{
