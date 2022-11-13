@@ -13,7 +13,6 @@ tools {
     }
 
 stages{
-
        stage ('Initialize') {
             steps {
                     echo "JAVA_HOME = ${JAVA_HOME}"
@@ -25,9 +24,7 @@ stages{
 
     stage('Build') {
      steps{
-            def env = ${params.env};
-            def tags = ${params.tags};
-            bat 'mvn clean install -Dcucumber.filter.tags='+tags+' -Dtestenv='+env
+            bat "mvn clean install -Dcucumber.filter.tags=${params.tags} -Dtestenv=${params.env}"
         }
     }
 
