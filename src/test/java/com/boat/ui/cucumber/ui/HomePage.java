@@ -11,6 +11,8 @@ import java.util.Map;
 
 public class HomePage {
 
+    public static String env = System.getProperty("testenv");
+
     @FindBy(xpath = "xpath")
     private WebElement webElement;
 
@@ -20,6 +22,8 @@ public class HomePage {
     }
 
     public void loginAsUser(DataTable dataTable){
+        Reporter.log("Running in env : "+ env,true);
+        System.out.println("testEnv: " + env);
         Reporter.log("Login as user",true);
         Map<String, String> map = dataTable.asMap(String.class, String.class);
         map.forEach((k ,v )-> {
