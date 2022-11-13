@@ -21,8 +21,6 @@ stages{
                     echo "${params}"
                     echo "${params.env}"
                     echo "${env}"
-                    def env = params.env
-                    echo env
             }
         }
 
