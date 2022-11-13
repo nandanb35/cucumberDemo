@@ -11,16 +11,14 @@ stages{
 
        stage ('Initialize') {
             steps {
-                sh '''
                     echo "JAVA_HOME = ${JAVA_HOME}"
                     echo "MAVEN_HOME = ${MAVEN_HOME}"
-                '''
             }
         }
 
     stage('Build') {
      steps{
-          sh 'mvn clean install -Dcucumber.filter.tags="${tags}" -Dtestenv="${env}"'
+            bat 'mvn clean install -Dcucumber.filter.tags="${tags}" -Dtestenv="${env}"'
         }
     }
 
