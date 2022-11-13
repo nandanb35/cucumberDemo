@@ -6,7 +6,7 @@ stages{
 
     stage('Build'){
         steps{
-            withMaven(maven : 'maven_3_8_6'){
+            stage('build') {
                 sh 'mvn clean install -Dcucumber.filter.tags="${tags}" -Dtestenv="${env}"'
             }
         }
