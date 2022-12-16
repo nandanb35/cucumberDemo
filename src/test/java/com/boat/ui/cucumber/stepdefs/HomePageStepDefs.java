@@ -1,31 +1,48 @@
 package com.boat.ui.cucumber.stepdefs;
 
 
+import com.boat.ui.cucumber.api.HttpRest;
 import com.boat.ui.cucumber.ui.BaseClass;
 import com.boat.ui.cucumber.ui.HomePage;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.restassured.response.Response;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.Reporter;
+
+import java.util.List;
+import java.util.Map;
 
 
 public class HomePageStepDefs extends BaseClass {
 
     @Before()
-    public void launchBrower() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\raj\\Documents\\CucumberDemo\\src\\test\\resources\\drivers\\chromedriver.exe");
-        driver = new ChromeDriver();
-        Reporter.log("Launching Browser", true);
+    public void launchBrower(Scenario scenario) {
+        System.out.println("tags ---> " + scenario.getSourceTagNames());
+        if (!scenario.getSourceTagNames().contains("@API")) {
+            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/test/resources/drivers/chromedriver.exe");
+            driver = new ChromeDriver();
+            Reporter.log("Launching Browser", true);
+        }
     }
 
     @After
-    public void closeBrowser() {
-        driver.quit();
-        Reporter.log("closing browser", true);
+    public void closeBrowser(Scenario scenario) {
+
+        System.out.println("tags ---> " + scenario.getSourceTagNames());
+        if (!scenario.getSourceTagNames().contains("@API")) {
+            driver.quit();
+            Reporter.log("closing browser", true);
+        }
+
     }
 
     @Given("I login as user")
@@ -86,6 +103,39 @@ public class HomePageStepDefs extends BaseClass {
     public void placeOrder(String orderId) {
         HomePage homepage = PageFactory.initElements(driver, HomePage.class);
         homepage.cancelOrder(orderId);
+    }
+
+    @Given("I verify below users are returned in get users request")
+    public void verifyUsers(DataTable dataTable) {
+        Response response = HttpRest.excecuteGetRequest("https://jsonplaceholder.typicode.com/users");
+        Assert.assertEquals(200, response.getStatusCode());
+
+        List<Map<String, String>> list = dataTable.asMaps();
+
+        JSONArray array = new JSONArray(response.getBody().asString());
+
+        for (int i = 0; i < array.length(); i++) {
+            Assert.assertEquals(array.getJSONObject(i).getString("name"),list.get(i).get("name"));
+            Assert.assertEquals(array.getJSONObject(i).getString("email"),list.get(i).get("email"));
+            Assert.assertEquals(array.getJSONObject(i).getJSONObject("company").getString("name"),list.get(i).get("companyName"));
+        }
+
+    }
+
+    @Given("I create user with below data")
+    public void createUser(DataTable dataTable) {
+
+        Map<String,String> map = dataTable.asMap(String.class,String.class);
+        JSONObject payload = new JSONObject();
+        payload.put("title",map.get("title"));
+        payload.put("body",map.get("body"));
+        payload.put("userId",map.get("userId"));
+
+        Response response = HttpRest.excecutePostRequest("https://jsonplaceholder.typicode.com/posts", payload.toString());
+        Assert.assertEquals(201, response.getStatusCode());
+
+        JSONObject user = new JSONObject(response.getBody().asString());
+        Assert.assertEquals(user.optInt("id"),101);
     }
 
 
