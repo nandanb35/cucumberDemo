@@ -26,6 +26,7 @@ public class HomePageStepDefs extends BaseClass {
 
     @Before()
     public void launchBrower(Scenario scenario) {
+        Reporter.log(" @Before",true);
         System.out.println("tags ---> " + scenario.getSourceTagNames());
         if (!scenario.getSourceTagNames().contains("@API")) {
             System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/test/resources/drivers/chromedriver.exe");
@@ -36,8 +37,8 @@ public class HomePageStepDefs extends BaseClass {
 
     @After
     public void closeBrowser(Scenario scenario) {
-
-        System.out.println("tags ---> " + scenario.getSourceTagNames());
+        Reporter.log(" @After",true);
+        Reporter.log("tags ---> " + scenario.getSourceTagNames(), true);
         if (!scenario.getSourceTagNames().contains("@API")) {
             driver.quit();
             Reporter.log("closing browser", true);
@@ -115,9 +116,9 @@ public class HomePageStepDefs extends BaseClass {
         JSONArray array = new JSONArray(response.getBody().asString());
 
         for (int i = 0; i < array.length(); i++) {
-            Assert.assertEquals(array.getJSONObject(i).getString("name"),list.get(i).get("name"));
-            Assert.assertEquals(array.getJSONObject(i).getString("email"),list.get(i).get("email"));
-            Assert.assertEquals(array.getJSONObject(i).getJSONObject("company").getString("name"),list.get(i).get("companyName"));
+            Assert.assertEquals(array.getJSONObject(i).getString("name"), list.get(i).get("name"));
+            Assert.assertEquals(array.getJSONObject(i).getString("email"), list.get(i).get("email"));
+            Assert.assertEquals(array.getJSONObject(i).getJSONObject("company").getString("name"), list.get(i).get("companyName"));
         }
 
     }
@@ -125,17 +126,17 @@ public class HomePageStepDefs extends BaseClass {
     @Given("I create user with below data")
     public void createUser(DataTable dataTable) {
 
-        Map<String,String> map = dataTable.asMap(String.class,String.class);
+        Map<String, String> map = dataTable.asMap(String.class, String.class);
         JSONObject payload = new JSONObject();
-        payload.put("title",map.get("title"));
-        payload.put("body",map.get("body"));
-        payload.put("userId",map.get("userId"));
+        payload.put("title", map.get("title"));
+        payload.put("body", map.get("body"));
+        payload.put("userId", map.get("userId"));
 
         Response response = HttpRest.excecutePostRequest("https://jsonplaceholder.typicode.com/posts", payload.toString());
         Assert.assertEquals(201, response.getStatusCode());
 
         JSONObject user = new JSONObject(response.getBody().asString());
-        Assert.assertEquals(user.optInt("id"),101);
+        Assert.assertEquals(user.optInt("id"), 101);
     }
 
 
