@@ -22,14 +22,18 @@ stages{
 
     stage('Build') {
     
-     try {
-            steps{
-            bat "mvn clean install -Dcucumber.filter.tags=@Sanity -Dtestenv=qa  -DthreadCount=10"
-        }
+     steps{
+    
+            
+             try {
+           bat "mvn clean install -Dcucumber.filter.tags=@Sanity -Dtestenv=qa  -DthreadCount=10"
         }
         catch (exc) {
             echo 'there are failures'
         }
+        }
+    
+    
     
     }
 
