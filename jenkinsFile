@@ -2,15 +2,11 @@ pipeline{
 
 agent any
 
- parameters {
-        string(name: 'tags', description: '')
-        string(name: 'env', description: '')
-        string(name: 'branch', description: '')
-    }
+
 
 tools {
         maven 'mvn'
-        jdk 'JDK'
+        jdk 'jdk'
     }
 
 stages{
@@ -18,15 +14,13 @@ stages{
             steps {
                     echo "JAVA_HOME = ${JAVA_HOME}"
                     echo "MAVEN_HOME = ${MAVEN_HOME}"
-                    echo "${params}"
-                    echo "${params.env}"
             }
         }
 
 
     stage('Build') {
      steps{
-            bat "mvn clean install -Dcucumber.filter.tags=${params.tags} -Dtestenv=${params.env}"
+            bat "mvn clean install -Dcucumber.filter.tags=@Sanity -Dtestenv=qa"
         }
     }
 
