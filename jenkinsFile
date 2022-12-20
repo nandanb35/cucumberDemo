@@ -14,6 +14,8 @@ stages{
             steps {
                     echo "JAVA_HOME = ${JAVA_HOME}"
                     echo "MAVEN_HOME = ${MAVEN_HOME}"
+                    echo "====> ${params}"
+                    echo "====>  ${params.env}"
             }
         }
 
