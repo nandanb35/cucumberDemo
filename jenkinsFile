@@ -18,6 +18,13 @@ stages{
                     echo "====>  ${params.env}"
             }
         }
+        
+        stage('git'){
+        
+        steps{
+        git branch: 'main', credentialsId: '6b5d20cd-9f75-4b0f-96ce-026081544308', url: 'https://github.com/nandanb35/cucumberDemo.git'
+        }
+        }
 
 
     stage('Build') {
